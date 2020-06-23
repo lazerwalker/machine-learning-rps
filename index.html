@@ -146,13 +146,6 @@
     </div>
 
     <div id="instructions">
-      <p>
-        Touching your face makes it more likely you'll contract COVID-19! <br />
-        Break the habit by letting us honk at you when you touch your face.<br />
-        You can run this in the background, but it needs to be in its own window
-        rather than a tab.
-      </p>
-
       <p id="safari-warning" hidden="true">
         It looks like you're using Safari! If you're not hearing any audio,
         select the "Safari" menu, then "Settings for This Website". Set the
@@ -164,33 +157,18 @@
     </div>
     <video id="webcam"></video>
 
-    <h1>
-      It has been <span id="time">0:00</span> since you last touched your face
-    </h1>
-    <div id="high-score">
-      <span class="celebration">🎉</span>
-      Your record is <span id="high-score-time">0:00</span>
-      <span class="celebration">🎉</span>
-    </div>
-
     <div>
       Built by <a href="https://twitter.com/lazerwalker">@lazerwalker</a> with
       the
       <a
-        href="https://docs.microsoft.com/en-us/azure/cognitive-services/custom-vision-service/getting-started-build-a-classifier?WT.mc_id=example-facetoucher-emwalker"
+        href="https://docs.microsoft.com/en-us/azure/cognitive-services/custom-vision-service/getting-started-build-a-classifier?WT.mc_id=sample-neuralspeech-emwalker"
         >Azure Custom Vision Service</a
-      >.
+      > and <a href="https://docs.microsoft.com/en-ca/azure/cognitive-services/speech-service/quickstarts/text-to-speech?WT.mc_id=sample-neuralspeech-emwalker">Azure Neural Speech Service</a>
 
       <p>
         All processing happens in your web browser.<br />Your webcam data does
         not leave your computer.
-      </p>
-      <p>
-        Not working very well? Help improve quality by spending ~2 minutes to
-        <a href="https://facetoucherstorage.z5.web.core.windows.net"
-          >provide some training data</a
-        >.
-      </p>
+      </p>      
     </div>
 
     <div id="options">
@@ -198,61 +176,7 @@
       <div>
         <h3>When you touch your face:</h3>
 
-        <div>
-          <input type="checkbox" id="play-sound" checked />
-          <label for="play-sound">Play A Loud Sound</label> <br />
-
-          <input type="checkbox" id="show-alert" />
-          <label for="show-alert">Trigger A System Alert</label><br />This will
-          bring this window to the foreground, even if it wasn't visible before.
-        </div>
-
-        <h3>Sound Effect:</h3>
-
-        <div>
-          <input
-            type="radio"
-            class="sfx"
-            id="honk"
-            name="sfx"
-            value="audio/honk.mp3"
-            checked
-          />
-          <label for="honk">Honk</label>
-        </div>
-
-        <div>
-          <input
-            type="radio"
-            class="sfx"
-            id="no"
-            name="sfx"
-            value="audio/no.mp3"
-          />
-          <label for="no">No</label>
-        </div>
-
-        <div>
-          <input
-            type="radio"
-            class="sfx"
-            id="error"
-            name="sfx"
-            value="audio/error.mp3"
-          />
-          <label for="error">Windows XP Error</label>
-        </div>
-
-        <div>
-          <input
-            type="radio"
-            class="sfx"
-            id="ohno"
-            name="sfx"
-            value="audio/ohno.mp3"
-          />
-          <label for="ohno">Oh No</label>
-        </div>
+        
       </div>
     </div>
   </body>

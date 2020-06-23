@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "parcel index.html",
-    "build": "parcel build index.html --public-url /dont-touch-your-face; cp -r model dist; cp -r audio dist;",
+    "build": "parcel build index.html; rsync -r model dist; rsync -r audio dist;"
   },
   "author": "",
   "license": "ISC",
@@ -14,6 +14,6 @@
     "typescript": "^3.8.3"
   },
   "dependencies": {
-    "@microsoft/customvision-tfjs": "^1.0.1",
+    "@microsoft/customvision-tfjs": "^1.0.1"
   }
 }
