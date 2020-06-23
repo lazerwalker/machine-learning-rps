@@ -1,6 +1,6 @@
 import { detect } from "./touchingDetector";
+import { textToSpeech } from "./textToSpeech";
 
-let currentAudio: string = "audio/honk.mp3";
 let audioLastPlayed: Date = new Date();
 let audioThrottle: number = 500;
 
@@ -34,8 +34,7 @@ function playAudio() {
 
   audioLastPlayed = now;
 
-  const audio = new Audio(currentAudio);
-  audio.play();
+  textToSpeech("you touched your face");
 }
 
 let testingTimeout: number;

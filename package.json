@@ -14,6 +14,7 @@
     "typescript": "^3.8.3"
   },
   "dependencies": {
-    "@microsoft/customvision-tfjs": "^1.0.1"
+    "@microsoft/customvision-tfjs": "^1.0.1",
+    "microsoft-cognitiveservices-speech-sdk": "^1.12.1"
   }
 }
