@@ -1,0 +1,3 @@
+no face present
+not touching face
+touching face

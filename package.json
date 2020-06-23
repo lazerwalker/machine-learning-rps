@@ -1,0 +1,19 @@
+{
+  "name": "neural-tts-sample",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "parcel index.html",
+    "build": "parcel build index.html --public-url /dont-touch-your-face; cp -r model dist; cp -r audio dist;",
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "parcel": "^1.12.4",
+    "typescript": "^3.8.3"
+  },
+  "dependencies": {
+    "@microsoft/customvision-tfjs": "^1.0.1",
+  }
+}
