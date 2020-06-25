@@ -39,9 +39,9 @@ export function textToSpeech(text: string) {
   }
   isLoading = true;
 
-  // TODO: Move this someplace more secure, cycle this key before public release
-  const subscriptionKey = "76f8b4a9132241c791b2b07dba40b1e0";
-  const serviceRegion = "eastus";
+  const subscriptionKey = process.env.COGNITIVE_SERVICES_SUBSCRIPTION_KEY;
+  const serviceRegion = process.env.COGNITIVE_SERVICES_REGION;
+  console.log("Keys?", subscriptionKey, serviceRegion);
 
   const speechConfig = SpeechSDK.SpeechConfig.fromSubscription(
     subscriptionKey,
