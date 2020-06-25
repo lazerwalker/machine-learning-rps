@@ -1,3 +1,4 @@
-no face present
-not touching face
-touching face
+none
+paper
+rock
+scissors

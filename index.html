@@ -31,23 +31,6 @@
         padding-top: 20px;
       }
 
-      #high-score {
-        font-size: 1.5em;
-        margin-bottom: 2em;
-      }
-
-      #high-score-time {
-        font-weight: bold;
-      }
-
-      #high-score .celebration {
-        display: none;
-      }
-
-      #high-score.winning .celebration {
-        display: inline;
-      }
-
       #webcam {
         height: 480px;
         width: 640px;
@@ -66,8 +49,6 @@
         left: 30%;
         top: 200px;
         text-align: left;
-
-        display: none;
       }
 
       #debug-panel h2,
@@ -137,12 +118,14 @@
     </style>
   </head>
   <body>
-    <h1 id="header">Don't Touch Your Face</h1>
+    <h1 id="header">Rock, Paper, Scissors Detector</h1>
 
     <div id="debug-panel">
       <h2>Debug</h2>
-      <div>Touching Face: <span id="chance-touching">0%</span></div>
-      <div>Not Touching Face: <span id="chance-not-touching">0%</span></div>
+      <div>Nothing: <span id="chance-nothing">0%</span></div>
+      <div>Rock: <span id="chance-rock">0%</span></div>
+      <div>Paper: <span id="chance-paper">0%</span></div>
+      <div>Scissors: <span id="chance-scissors">0%</span></div>
     </div>
 
     <div id="instructions">
@@ -158,25 +141,27 @@
     <video id="webcam"></video>
 
     <div>
-      Built by <a href="https://twitter.com/lazerwalker">@lazerwalker</a> with
-      the
+      Built with the
       <a
         href="https://docs.microsoft.com/en-us/azure/cognitive-services/custom-vision-service/getting-started-build-a-classifier?WT.mc_id=sample-neuralspeech-emwalker"
         >Azure Custom Vision Service</a
-      > and <a href="https://docs.microsoft.com/en-ca/azure/cognitive-services/speech-service/quickstarts/text-to-speech?WT.mc_id=sample-neuralspeech-emwalker">Azure Neural Speech Service</a>
+      >
+      and
+      <a
+        href="https://docs.microsoft.com/en-ca/azure/cognitive-services/speech-service/quickstarts/text-to-speech?WT.mc_id=sample-neuralspeech-emwalker"
+        >Azure Neural Speech Service</a
+      >.
 
       <p>
         All processing happens in your web browser.<br />Your webcam data does
         not leave your computer.
-      </p>      
+      </p>
     </div>
 
     <div id="options">
       <h2>Options</h2>
       <div>
         <h3>When you touch your face:</h3>
-
-        
       </div>
     </div>
   </body>

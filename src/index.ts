@@ -1,4 +1,4 @@
-import { detect } from "./touchingDetector";
+import { detect } from "./imageDetection";
 import { textToSpeech } from "./textToSpeech";
 
 let audioLastPlayed: Date = new Date();
@@ -69,7 +69,12 @@ async function checkFaceTouching(
   if (!result) return;
   console.log(result);
 
-  return result.chanceTouching > 0.01 && result.chanceNotTouching < 0.002;
+  document.getElementById("chance-nothing").innerText = result.chanceNothing;
+  document.getElementById("chance-rock").innerText = result.chanceRock;
+  document.getElementById("chance-paper").innerText = result.chancePaper;
+  document.getElementById("chance-scissors").innerText = result.chanceScissors;
+
+  return false;
 }
 
 document.addEventListener("DOMContentLoaded", () => {
