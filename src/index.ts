@@ -78,10 +78,6 @@ async function checkFaceTouching(
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  console.log(
-    process.env.COGNITIVE_SERVICES_REGION,
-    process.env.COGNITIVE_SERVICES_SUBSCRIPTION_KEY
-  );
   document.getElementById("start").addEventListener("click", () => {
     document.getElementById("start").hidden = true;
     startVideoStream();
