@@ -27,15 +27,6 @@ function startVideoStream() {
 }
 
 function playAudio(type: ClassificationOption) {
-  const now = new Date();
-
-  if (audioLastPlayed[type]) {
-    const differenceInMS = Math.floor(now.getTime() - audioLastPlayed[type].getTime());
-    if (differenceInMS < audioThrottle) return;
-  }
-
-  audioLastPlayed[type] = now;
-
   const map = {
     [ClassificationOption.Rock]: "rock",
     [ClassificationOption.Paper]: "paper",
@@ -44,6 +35,24 @@ function playAudio(type: ClassificationOption) {
     [ClassificationOption.Spock]: "spock",
     [ClassificationOption.Nothing]: "nothing",  
   }
+
+  const text = map[type]
+  const now = new Date();
+
+  if (audioLastPlayed[text]) {
+    const differenceInMS = Math.floor(now.getTime() - audioLastPlayed[text].getTime());
+    if (differenceInMS < audioThrottle) {
+      console.log("Throttled")
+      return;
+    }
+  }
+
+  audioLastPlayed[text] = now;
+
+
+
+  console.log("Playing", type, text)
+
 
   textToSpeech(map[type]);
 }
@@ -54,9 +63,9 @@ function startTesting(video: HTMLVideoElement, interval: number = 100) {
   const loop = async () => {
     const result = await detect(video);
     if (!result) return;
-    console.log(result);
 
     updateDebugView(result);
+    console.log(result.result)
 
     if (result.result !== ClassificationOption.Nothing) {
       playAudio(result.result)

@@ -1,6 +1,6 @@
 import * as SpeechSDK from "microsoft-cognitiveservices-speech-sdk";
 
-let ttsBuffer: AudioBuffer | undefined;
+let cache: { [text: string]: AudioBuffer } = {};
 
 let isPlaying: Boolean = false;
 let isLoading: Boolean = false;
@@ -9,6 +9,7 @@ const AudioContext = window.AudioContext || (window as any).webkitAudioContext;
 
 const play = (context: AudioContext, buffer: AudioBuffer) => {
   if (isPlaying) return;
+  console.log("Playing a buffer");
 
   const source = context.createBufferSource();
 
@@ -23,21 +24,22 @@ const play = (context: AudioContext, buffer: AudioBuffer) => {
 };
 
 export function textToSpeech(text: string) {
-  if (ttsBuffer) {
+  if (isLoading) {
+    return;
+  }
+  isLoading = true;
+
+  if (cache[text]) {
     if (!AudioContext) {
       console.log("Your browser cannot play audio");
       return;
     }
     const context = new AudioContext();
 
-    play(context, ttsBuffer);
+    play(context, cache[text]);
+    isLoading = false;
     return;
   }
-
-  if (isLoading) {
-    return;
-  }
-  isLoading = true;
 
   const subscriptionKey = process.env.COGNITIVE_SERVICES_SUBSCRIPTION_KEY;
   const serviceRegion = process.env.COGNITIVE_SERVICES_REGION;
@@ -60,8 +62,8 @@ export function textToSpeech(text: string) {
 
     const context = new AudioContext();
 
-    ttsBuffer = await context.decodeAudioData(result.audioData);
-    play(context, ttsBuffer);
+    cache[text] = await context.decodeAudioData(result.audioData);
+    play(context, cache[text]);
     isLoading = false;
 
     synthesizer.close();
