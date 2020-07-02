@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "parcel index.html",
-    "build": "parcel build index.html; rsync -r model dist; "
+    "dev": "parcel index.html -d app",
+    "build": "parcel build index.html -d app; rsync -r model app; "
   },
   "author": "",
   "license": "ISC",
