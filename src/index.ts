@@ -1,7 +1,7 @@
-import { detect } from "./imageDetection";
+import { detect, ClassificationResult, ClassificationOption } from "./imageDetection";
 import { textToSpeech } from "./textToSpeech";
 
-let audioLastPlayed: Date = new Date();
+let audioLastPlayed: {[type: ClassificationOption]: Date} = {}
 let audioThrottle: number = 500;
 
 function startVideoStream() {
@@ -26,30 +26,40 @@ function startVideoStream() {
     });
 }
 
-function playAudio() {
+function playAudio(type: ClassificationOption) {
   const now = new Date();
-  const differenceInMS = Math.floor(now.getTime() - audioLastPlayed.getTime());
 
-  if (differenceInMS < audioThrottle) return;
+  if (audioLastPlayed[type]) {
+    const differenceInMS = Math.floor(now.getTime() - audioLastPlayed[type].getTime());
+    if (differenceInMS < audioThrottle) return;
+  }
 
-  audioLastPlayed = now;
+  audioLastPlayed[type] = now;
 
-  textToSpeech("you touched your face");
+  const map = {
+    [ClassificationOption.Rock]: "rock",
+    [ClassificationOption.Paper]: "paper",
+    [ClassificationOption.Scissors]: "scissors",
+    [ClassificationOption.Lizard]: "lizard",
+    [ClassificationOption.Spock]: "spock",
+    [ClassificationOption.Nothing]: "nothing",  
+  }
+
+  textToSpeech(map[type]);
 }
 
 let testingTimeout: number;
 
 function startTesting(video: HTMLVideoElement, interval: number = 100) {
-  const title = document.getElementById("header");
-
   const loop = async () => {
-    const isTouching = await checkFaceTouching(video);
+    const result = await detect(video);
+    if (!result) return;
+    console.log(result);
 
-    if (isTouching) {
-      playAudio();
-      document.body.classList.add("touching");
-    } else {
-      document.body.classList.remove("touching");
+    updateDebugView(result);
+
+    if (result.result !== ClassificationOption.Nothing) {
+      playAudio(result.result)
     }
 
     testingTimeout = (setTimeout(loop, interval) as unknown) as number;
@@ -58,25 +68,25 @@ function startTesting(video: HTMLVideoElement, interval: number = 100) {
   loop();
 }
 
-function stopTesting() {
-  clearTimeout(testingTimeout);
+function updateDebugView(result: ClassificationResult) {
+  const format = (n: number) => `${(n * 100).toFixed(2)}%`;
+
+  const map = {
+    "chance-nothing": result.chanceNothing,
+    "chance-rock": result.chanceRock,
+    "chance-paper": result.chancePaper,
+    "chance-scissors": result.chanceScissors,
+    "chance-lizard": result.chanceLizard,
+    "chance-spock": result.chanceSpock,
+  };
+
+  Object.keys(map).forEach(id => {
+    document.getElementById(id).innerText = format(map[id])
+  }
 }
 
-async function checkFaceTouching(
-  video: HTMLVideoElement
-): Promise<boolean | undefined> {
-  const result = await detect(video);
-  if (!result) return;
-  console.log(result);
-
-  document.getElementById("chance-nothing").innerText = result.chanceNothing;
-  document.getElementById("chance-rock").innerText = result.chanceRock;
-  document.getElementById("chance-paper").innerText = result.chancePaper;
-  document.getElementById("chance-scissors").innerText = result.chanceScissors;
-  document.getElementById("chance-lizard").innerText = result.chanceLizard;
-  document.getElementById("chance-spock").innerText = result.chanceSpock;
-
-  return false;
+function stopTesting() {
+  clearTimeout(testingTimeout);
 }
 
 document.addEventListener("DOMContentLoaded", () => {

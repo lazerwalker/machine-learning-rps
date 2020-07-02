@@ -1,13 +1,23 @@
 import * as cvstfjs from "@microsoft/customvision-tfjs";
 
+export enum ClassificationOption {
+  Nothing,
+  Rock,
+  Paper,
+  Scissors,
+  Lizard,
+  Spock,
+}
+
 /** Results as 0-1.0 percentage chances */
-interface ClassificationResult {
+export interface ClassificationResult {
   chanceNothing: number;
   chancePaper: number;
   chanceRock: number;
   chanceScissors: number;
   chanceLizard: number;
   chanceSpock: number;
+  result: ClassificationOption;
 }
 
 export async function detect(image: HTMLVideoElement) {
@@ -33,5 +43,6 @@ export async function detect(image: HTMLVideoElement) {
     chanceRock,
     chanceScissors,
     chanceSpock,
+    result: ClassificationOption.Nothing, // TODO: Replace this!
   };
 }
