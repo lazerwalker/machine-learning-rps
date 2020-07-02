@@ -51,6 +51,10 @@
         text-align: left;
       }
 
+      #debug-panel.hidden {
+        display: none;
+      }
+
       #debug-panel h2,
       #options h2 {
         text-align: center;
@@ -120,12 +124,14 @@
   <body>
     <h1 id="header">Rock, Paper, Scissors Detector</h1>
 
-    <div id="debug-panel">
+    <div id="debug-panel" class="hidden">
       <h2>Debug</h2>
       <div>Nothing: <span id="chance-nothing">0%</span></div>
       <div>Rock: <span id="chance-rock">0%</span></div>
       <div>Paper: <span id="chance-paper">0%</span></div>
       <div>Scissors: <span id="chance-scissors">0%</span></div>
+      <div>Lizard: <span id="chance-lizard">0%</span></div>
+      <div>Spock: <span id="chance-spock">0%</span></div>
     </div>
 
     <div id="instructions">

@@ -73,6 +73,8 @@ async function checkFaceTouching(
   document.getElementById("chance-rock").innerText = result.chanceRock;
   document.getElementById("chance-paper").innerText = result.chancePaper;
   document.getElementById("chance-scissors").innerText = result.chanceScissors;
+  document.getElementById("chance-lizard").innerText = result.chanceLizard;
+  document.getElementById("chance-spock").innerText = result.chanceSpock;
 
   return false;
 }
@@ -81,6 +83,13 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("start").addEventListener("click", () => {
     document.getElementById("start").hidden = true;
     startVideoStream();
+  });
+
+  document.addEventListener("keypress", (e) => {
+    if (e.code === "KeyD") {
+      const debug = document.querySelector("#debug-panel");
+      debug.classList.toggle("hidden");
+    }
   });
 
   if ((window as any).safari) {

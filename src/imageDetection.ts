@@ -6,6 +6,8 @@ interface ClassificationResult {
   chancePaper: number;
   chanceRock: number;
   chanceScissors: number;
+  chanceLizard: number;
+  chanceSpock: number;
 }
 
 export async function detect(image: HTMLVideoElement) {
@@ -14,13 +16,22 @@ export async function detect(image: HTMLVideoElement) {
   const result = await model.executeAsync(image);
   console.log(JSON.stringify(result));
   const probabilities = result[0];
-  if (!probabilities || probabilities.length !== 4) return;
+  if (!probabilities || probabilities.length !== 6) return;
 
   const [
+    chanceLizard,
     chanceNothing,
     chancePaper,
     chanceRock,
     chanceScissors,
+    chanceSpock,
   ] = probabilities;
-  return { chanceNothing, chancePaper, chanceRock, chanceScissors };
+  return {
+    chanceLizard,
+    chanceNothing,
+    chancePaper,
+    chanceRock,
+    chanceScissors,
+    chanceSpock,
+  };
 }
