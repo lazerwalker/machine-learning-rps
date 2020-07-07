@@ -18,7 +18,7 @@ When prompted to enter various application paths in the "Build" setup tab, leave
 
 ![The UI to add a GitHub Secret](github-secrets.png)
 
-7. In the GitHub Action file that Azure Static Web Apps has created for you in your project (`.github/workflows/some-filename.yml`), add the following lines in between the "actions/checkout@v2" and "Build and Deploy" steps/code blocks. You can refer to the [yml file in this repo](https://github.com/lazerwalker/neural-tts-sample/blob/main/.github/workflows/azure-static-web-apps-ashy-desert-0c220ef0f.yml) for a reference.
+7. In the GitHub Action file that Azure Static Web Apps has created for you in your project (`.github/workflows/some-filename.yml`), add the following lines in between the "actions/checkout@v2" and "Build and Deploy" steps/code blocks. You can refer to the [yml file in this repo](https://github.com/lazerwalker/neural-tts-sample/blob/main/.github/workflows/azure-static-web-apps-victorious-coast-06aa4f30f.yml) for a reference.
 
 ```
   - name: Inject secret keys
