@@ -42,4 +42,4 @@ even what gestures or objects the camera detects. This is a great way to try out
 the capabilities of Neural Text to Speech and Custom Vision, and all you need to
 do is push changes to the GitHub repository and Static Web Apps will rebuild and
 redeploy the application for you. Check out the instructions in
-[CUSTOMIZATION.md](CUSTOMIZATION.md) for details. TEst.
+[CUSTOMIZATION.md](CUSTOMIZATION.md) for details.
