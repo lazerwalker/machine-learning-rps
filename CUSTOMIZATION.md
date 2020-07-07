@@ -2,7 +2,7 @@ There are a bunch of choices if you want to customize this sample app!
 
 ## Changing the Spoken Text
 
-If you want to change what words are read out when different hand symbols are recognized, just tweak the JS object [here](https://github.com/lazerwalker/machine-learning-rps/blob/main/src/index.ts#L30-L37).
+If you want to change what words are read out when different hand symbols are recognized, just tweak the JS object [here](https://github.com/lazerwalker/machine-learning-rps/blob/main/src/index.ts#L33-L43).
 
 When the machine learning model recognizes on of the symbols listed as keys / on the left-hand side, it will trigger neural text-to-speech using the text values on the right-hand side.
 

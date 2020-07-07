@@ -1,7 +1,11 @@
-import { detect, ClassificationResult, ClassificationOption } from "./imageDetection";
+import {
+  detect,
+  ClassificationResult,
+  ClassificationOption,
+} from "./imageDetection";
 import { textToSpeech } from "./textToSpeech";
 
-let audioLastPlayed: {[type: ClassificationOption]: Date} = {}
+let audioLastPlayed: { [type: ClassificationOption]: Date } = {};
 let audioThrottle: number = 500;
 
 function startVideoStream() {
@@ -26,35 +30,36 @@ function startVideoStream() {
     });
 }
 
-function playAudio(type: ClassificationOption) {
+function stringForResult(type: ClassificationOption): string {
   const map = {
     [ClassificationOption.Rock]: "rock",
     [ClassificationOption.Paper]: "paper",
     [ClassificationOption.Scissors]: "scissors",
     [ClassificationOption.Lizard]: "lizard",
     [ClassificationOption.Spock]: "spock",
-    [ClassificationOption.Nothing]: "nothing",  
-  }
+    [ClassificationOption.Nothing]: "nothing",
+  };
+  return map[type];
+}
 
-  const text = map[type]
+function playAudio(text: string) {
   const now = new Date();
 
   if (audioLastPlayed[text]) {
-    const differenceInMS = Math.floor(now.getTime() - audioLastPlayed[text].getTime());
+    const differenceInMS = Math.floor(
+      now.getTime() - audioLastPlayed[text].getTime()
+    );
     if (differenceInMS < audioThrottle) {
-      console.log("Throttled")
+      console.log("Throttled");
       return;
     }
   }
 
   audioLastPlayed[text] = now;
 
+  console.log("Playing", text);
 
-
-  console.log("Playing", type, text)
-
-
-  textToSpeech(map[type]);
+  textToSpeech(text);
 }
 
 let testingTimeout: number;
@@ -66,8 +71,17 @@ function startTesting(video: HTMLVideoElement, interval: number = 100) {
 
     updateDebugView(result);
 
+    const text = stringForResult(result.result);
+
+    const textDisplay = document.getElementById("spoken-text");
+    if (result.result === ClassificationOption.Nothing) {
+      textDisplay.innerText = "";
+    } else {
+      textDisplay.innerText = `"${text}"`;
+    }
+
     if (result.result !== ClassificationOption.Nothing) {
-      playAudio(result.result)
+      playAudio(text);
     }
 
     testingTimeout = (setTimeout(loop, interval) as unknown) as number;
@@ -88,13 +102,9 @@ function updateDebugView(result: ClassificationResult) {
     "chance-spock": result.chanceSpock,
   };
 
-  Object.keys(map).forEach(id => {
-    document.getElementById(id).innerText = format(map[id])
-  }
-}
-
-function stopTesting() {
-  clearTimeout(testingTimeout);
+  Object.keys(map).forEach((id) => {
+    document.getElementById(id).innerText = format(map[id]);
+  });
 }
 
 document.addEventListener("DOMContentLoaded", () => {

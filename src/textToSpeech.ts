@@ -7,15 +7,12 @@ let isLoading: Boolean = false;
 
 const AudioContext = window.AudioContext || (window as any).webkitAudioContext;
 
-const play = (context: AudioContext, text: string, buffer: AudioBuffer) => {
+const play = (context: AudioContext, buffer: AudioBuffer) => {
   if (isPlaying) {
     console.log("Is playing already");
     return;
   }
   console.log("Playing a buffer");
-
-  const textDisplay = document.getElementById("spoken-text");
-  textDisplay.innerText = `"${text}"`;
 
   const source = context.createBufferSource();
 
@@ -25,7 +22,6 @@ const play = (context: AudioContext, text: string, buffer: AudioBuffer) => {
 
   isPlaying = true;
   source.onended = () => {
-    textDisplay.innerText = "";
     isPlaying = false;
   };
 };
@@ -45,7 +41,7 @@ export function textToSpeech(text: string) {
     }
     const context = new AudioContext();
 
-    play(context, text, cache[text]);
+    play(context, cache[text]);
     isLoading = false;
     return;
   }
@@ -78,15 +74,16 @@ export function textToSpeech(text: string) {
     // We don't manually call `play` here because the act of
     // `speakTextAsync` outputs to the system audio
 
-    isLoading = false;
     synthesizer.close();
   };
 
-  const textDisplay = document.getElementById("spoken-text");
-  textDisplay.innerText = `"${text}"`;
-
+  isPlaying = true;
   synthesizer.synthesisCompleted = (sender, e) => {
-    textDisplay.innerText = "";
+    // The extra timeout helps prevent double-playing
+    setTimeout(() => {
+      isPlaying = false;
+      isLoading = false;
+    }, 500);
   };
 
   // We assume something is valid SSML if it is wrapped by what appears to be a
