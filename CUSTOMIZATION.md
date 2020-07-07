@@ -1,3 +1,5 @@
+# Customizing this application
+
 There are a bunch of choices if you want to customize this sample app!
 
 ## Changing the Spoken Text

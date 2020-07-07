@@ -34,3 +34,12 @@ When prompted to enter various application paths in the "Build" setup tab, leave
 Once you have committed this change, GitHub Actions will automatically attempt to build your app again. If it succeeds (and it should!) then you should be able to see your app live on the Internet!
 
 If you want to be able to run the app locally, copy the `.env.local.sample` file to `.env.local` and add your keys there as well. Do not commit this file to git. After running `npm install`, you can run a local server to test the app with `npm run dev`.
+
+## Customizing the Application
+
+You can tweak the code of this application to change the spoken phrases, and
+even what gestures or objects the camera detects. This is a great way to try out
+the capabilities of Neural Text to Speech and Custom Vision, and all you need to
+do is push changes to the GitHub repository and Static Web Apps will rebuild and
+redeploy the application for you. Check out the instructions in
+[CUSTOMIZATION.md](CUSTOMIZATION.md) for details. TEst.
