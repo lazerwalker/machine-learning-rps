@@ -7,12 +7,15 @@ let isLoading: Boolean = false;
 
 const AudioContext = window.AudioContext || (window as any).webkitAudioContext;
 
-const play = (context: AudioContext, buffer: AudioBuffer) => {
+const play = (context: AudioContext, text: string, buffer: AudioBuffer) => {
   if (isPlaying) {
     console.log("Is playing already");
     return;
   }
   console.log("Playing a buffer");
+
+  const textDisplay = document.getElementById("spoken-text");
+  textDisplay.innerText = `"${text}"`;
 
   const source = context.createBufferSource();
 
@@ -22,13 +25,14 @@ const play = (context: AudioContext, buffer: AudioBuffer) => {
 
   isPlaying = true;
   source.onended = () => {
+    textDisplay.innerText = "";
     isPlaying = false;
   };
 };
 
 export function textToSpeech(text: string) {
-  if (isLoading) {
-    console.log("Is loading already");
+  if (isLoading || isPlaying) {
+    console.log("Is loading or playing already");
     return;
   }
   isLoading = true;
@@ -41,7 +45,7 @@ export function textToSpeech(text: string) {
     }
     const context = new AudioContext();
 
-    play(context, cache[text]);
+    play(context, text, cache[text]);
     isLoading = false;
     return;
   }
@@ -71,13 +75,18 @@ export function textToSpeech(text: string) {
 
     cache[text] = await context.decodeAudioData(result.audioData);
 
-    // This play here causes the audio file to double-play.
-    // I don't currently fully understand why, so leaving this
-    // commented out instead of deleting as a hint for the future.
-    // play(context, cache[text]);
-    isLoading = false;
+    // We don't manually call `play` here because the act of
+    // `speakTextAsync` outputs to the system audio
 
+    isLoading = false;
     synthesizer.close();
+  };
+
+  const textDisplay = document.getElementById("spoken-text");
+  textDisplay.innerText = `"${text}"`;
+
+  synthesizer.synthesisCompleted = (sender, e) => {
+    textDisplay.innerText = "";
   };
 
   // We assume something is valid SSML if it is wrapped by what appears to be a
