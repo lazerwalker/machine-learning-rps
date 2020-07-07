@@ -53,7 +53,8 @@ export function textToSpeech(text: string) {
 
   const synthesizer = new SpeechSDK.SpeechSynthesizer(speechConfig);
   console.log("Fetching from server");
-  synthesizer.speakTextAsync(text, async (result) => {
+
+  const audioHandler = async (result) => {
     if (!result.audioData) return;
     if (!AudioContext) {
       console.log("Your browser cannot play audio");
@@ -67,5 +68,17 @@ export function textToSpeech(text: string) {
     isLoading = false;
 
     synthesizer.close();
-  });
+  };
+
+  // We assume something is valid SSML if it is wrapped by what appears to be a
+  // valid <speak> tag. This isn't perfect, but is good enough in most cases.
+  const isSsml =
+    text.indexOf("<speak") === 0 &&
+    text.indexOf("</speak>") === text.length - "</speak>".length;
+
+  if (isSsml) {
+    synthesizer.speakSsmlAsync(text, audioHandler);
+  } else {
+    synthesizer.speakTextAsync(text, audioHandler);
+  }
 }
