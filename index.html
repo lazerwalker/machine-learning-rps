@@ -91,32 +91,31 @@
         line-height: 1.5em;
       }
 
-      @media only screen and (min-width: 1800px) {
-        #options {
-          position: absolute;
-          right: 10%;
-          top: 220px;
-          width: 400px;
-          text-align: left;
-        }
+      #wrapper {
+        margin: auto;
+        max-width: 1200px;
       }
 
-      @media only screen and (min-width: 1200px) and (max-width: 1800px) {
-        video {
-          float: left;
-          margin-left: 40px;
-          margin-bottom: 40px;
-        }
-        #options {
-          position: absolute;
-          top: 200px;
-          right: 40px;
-          width: 400px;
-          text-align: left;
-        }
+      #webcam,
+      #options {
+        display: inline-block;
+        max-width: 40%;
+      }
 
-        h1 {
-          clear: both;
+      #options {
+        margin-left: 100px;
+      }
+
+      h1 {
+        clear: both;
+      }
+
+      @media only screen and (max-width: 1200px) {
+        #webcam,
+        #options {
+          float: none;
+          display: block;
+          max-width: 100%;
         }
       }
     </style>
@@ -144,9 +143,22 @@
 
       <button id="start">Start</button>
     </div>
-    <video id="webcam"></video>
 
-    <div>
+    <div id="wrapper">
+      <video id="webcam"></video>
+
+      <div id="options">
+        <div style="margin: 10px 0 10px 0;">
+          Make a symbol with your hand and we'll speak it to you!
+        </div>
+        <img
+          src="instructions.png"
+          id="instructions-img"
+          alt="examples of how to throw rock, paper, scissors, lizard, or spock"
+        />
+      </div>
+    </div>
+    <div style="clear: both;">
       Built with the
       <a
         href="https://docs.microsoft.com/en-us/azure/cognitive-services/custom-vision-service/getting-started-build-a-classifier?WT.mc_id=sample-neuralspeech-emwalker"
