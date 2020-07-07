@@ -8,7 +8,10 @@ let isLoading: Boolean = false;
 const AudioContext = window.AudioContext || (window as any).webkitAudioContext;
 
 const play = (context: AudioContext, buffer: AudioBuffer) => {
-  if (isPlaying) return;
+  if (isPlaying) {
+    console.log("Is playing already");
+    return;
+  }
   console.log("Playing a buffer");
 
   const source = context.createBufferSource();
@@ -25,11 +28,13 @@ const play = (context: AudioContext, buffer: AudioBuffer) => {
 
 export function textToSpeech(text: string) {
   if (isLoading) {
+    console.log("Is loading already");
     return;
   }
   isLoading = true;
 
   if (cache[text]) {
+    console.log("Playing cached");
     if (!AudioContext) {
       console.log("Your browser cannot play audio");
       return;
@@ -55,6 +60,7 @@ export function textToSpeech(text: string) {
   console.log("Fetching from server");
 
   const audioHandler = async (result) => {
+    console.log("Fetched from server");
     if (!result.audioData) return;
     if (!AudioContext) {
       console.log("Your browser cannot play audio");
@@ -64,7 +70,11 @@ export function textToSpeech(text: string) {
     const context = new AudioContext();
 
     cache[text] = await context.decodeAudioData(result.audioData);
-    play(context, cache[text]);
+
+    // This play here causes the audio file to double-play.
+    // I don't currently fully understand why, so leaving this
+    // commented out instead of deleting as a hint for the future.
+    // play(context, cache[text]);
     isLoading = false;
 
     synthesizer.close();

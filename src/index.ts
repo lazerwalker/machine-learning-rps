@@ -65,7 +65,6 @@ function startTesting(video: HTMLVideoElement, interval: number = 100) {
     if (!result) return;
 
     updateDebugView(result);
-    console.log(result.result)
 
     if (result.result !== ClassificationOption.Nothing) {
       playAudio(result.result)
