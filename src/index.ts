@@ -121,8 +121,15 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   if ((window as any).safari) {
-    const safari = document.getElementById("safari-warning");
-    const safariClose = document.getElementById("close-safari");
+    let safari;
+    let safariClose;
+    if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
+      safari = document.getElementById("safari-ios-warning");
+      safariClose = document.getElementById("close-ios-safari");
+    } else {
+      safari = document.getElementById("safari-warning");
+      safariClose = document.getElementById("close-safari");
+    }
 
     safari.hidden = false;
     safariClose.addEventListener("click", () => {

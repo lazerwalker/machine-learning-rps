@@ -71,7 +71,8 @@
         height: 60px;
       }
 
-      #safari-warning {
+      #safari-warning,
+      #safari-ios-warning {
         background-color: #cb4b16;
         text-align: center;
         margin: auto;
@@ -149,6 +150,12 @@
         select the "Safari" menu, then "Settings for This Website". Set the
         "Auto-Play" dropdown to "Allow All Auto-Play"
         <a href="#" id="close-safari" role="button">[x]</a>
+      </p>
+
+      <p id="safari-ios-warning" hidden="true">
+        It looks like you're using Safari! We're sorry, but your audio may not
+        work."
+        <a href="#" id="close-ios-safari" role="button">[x]</a>
       </p>
 
       <button id="start">Start</button>
