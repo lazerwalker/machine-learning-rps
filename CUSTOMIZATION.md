@@ -5,8 +5,7 @@ There are a bunch of choices if you want to customize this sample app!
 ## Changing the Spoken Text
 
 If you want to change what words are read out when different hand symbols are recognized, just tweak the JS object [here](https://github.com/lazerwalker/machine-learning-rps/blob/main/src/index.ts#L33-L43). When the machine learning model recognizes on of the symbols listed as keys on the left-hand side, it will trigger neural text-to-speech using the text values on the right-hand side.
-
-You can change the text strings to be read by the `en-US-AriaNeural` neural TTS voice. For example:
+The speech will be read by the `en-US-AriaNeural` neural TTS voice, but you can change the voice used [here](https://github.com/lazerwalker/machine-learning-rps/blob/main/src/textToSpeech.ts#L57). For example:
 
 ```js
   const map = {
@@ -18,7 +17,7 @@ You can change the text strings to be read by the `en-US-AriaNeural` neural TTS 
     [ClassificationOption.Nothing]: "nothing",
   };
 ```
-If you want to change that default voice, that is tweakable [here](https://github.com/lazerwalker/machine-learning-rps/blob/main/src/textToSpeech.ts#L52). Alternatively, you can provide [SSML](https://docs.microsoft.com/en-us/azure/cognitive-services/speech-service/speech-synthesis-markup?tabs=csharp&WT.mc_id=rpsweb-github-emwalker) to change the voice and other attributes of the speech. You can test out your SSML at the [Neural TTS demo page](https://azure.microsoft.com/en-us/services/cognitive-services/text-to-speech/?WT.mc_id=rpsweb-github-davidsmi#features).
+ Alternatively, you can provide [SSML](https://docs.microsoft.com/en-us/azure/cognitive-services/speech-service/speech-synthesis-markup?tabs=csharp&WT.mc_id=rpsweb-github-emwalker) to change the voice and other attributes of the speech. You can test out your SSML at the [Neural TTS demo page](https://azure.microsoft.com/en-us/services/cognitive-services/text-to-speech/?WT.mc_id=rpsweb-github-davidsmi#features).
 
 [![Text-to-speech demo screenshot](img/texttospeechdemo.png)](https://azure.microsoft.com/en-us/services/cognitive-services/text-to-speech/?WT.mc_id=rpsweb-github-davidsmi#features)
 
