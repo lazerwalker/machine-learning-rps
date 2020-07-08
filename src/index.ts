@@ -38,7 +38,8 @@ function stringForResult(type: ClassificationOption): string {
     [ClassificationOption.Lizard]: "lizard",
     [ClassificationOption.Spock]: "spock",
     [ClassificationOption.Nothing]: "nothing",
-  };  return map[type];
+  };  
+  return map[type];
 }
 
 function playAudio(text: string) {
