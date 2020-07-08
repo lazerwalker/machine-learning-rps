@@ -32,11 +32,11 @@ function startVideoStream() {
 
 function stringForResult(type: ClassificationOption): string {
   const map = {
-    [ClassificationOption.Rock]: "rock",
-    [ClassificationOption.Paper]: "paper",
-    [ClassificationOption.Scissors]: "scissors",
+    [ClassificationOption.Rock]: "that's a rock",
+    [ClassificationOption.Paper]: "flat hand makes paper",
+    [ClassificationOption.Scissors]: "don't run with scissors",
     [ClassificationOption.Lizard]: "lizard",
-    [ClassificationOption.Spock]: "spock",
+    [ClassificationOption.Spock]: "like a pinch on the neck from Mr Spock",
     [ClassificationOption.Nothing]: "nothing",
   };
   return map[type];
