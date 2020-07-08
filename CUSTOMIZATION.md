@@ -10,7 +10,18 @@ When the machine learning model recognizes on of the symbols listed as keys / on
 
 If a given text-to-speech string is valid [SSML](https://docs.microsoft.com/en-us/azure/cognitive-services/speech-service/speech-synthesis-markup?tabs=csharp&WT.mc_id=rpsweb-github-emwalker), Speech Services will use that SSML to determine how to read the text. Otherwise, if it's just a plain text string, it will be read by the `en-US-AriaNeural` neural TTS voice. You can test out your SSML at the [Neural TTS demo page](https://azure.microsoft.com/en-us/services/cognitive-services/text-to-speech/?WT.mc_id=rpsweb-github-davidsmi#features).
 
-[![The UI to add a GitHub Secret](img/texttospeechdemo.png)](https://azure.microsoft.com/en-us/services/cognitive-services/text-to-speech/?WT.mc_id=rpsweb-github-davidsmi#features)
+[![Text-to-speech demo screenshot](img/texttospeechdemo.png)](https://azure.microsoft.com/en-us/services/cognitive-services/text-to-speech/?WT.mc_id=rpsweb-github-davidsmi#features)
+
+```js
+  const map = {
+    [ClassificationOption.Rock]: "that's a rock",
+    [ClassificationOption.Paper]: "flat hand makes paper",
+    [ClassificationOption.Scissors]: "don't run with scissors",
+    [ClassificationOption.Lizard]: "lizard",
+    [ClassificationOption.Spock]: '<speak xmlns="http://www.w3.org/2001/10/synthesis" xmlns:mstts="http://www.w3.org/2001/mstts" xmlns:emo="http://www.w3.org/2009/10/emotionml" version="1.0" xml:lang="en-US"><voice name="en-US-AriaNeural"><mstts:express-as style="Cheerful"><prosody rate="0%" pitch="0%">like a pinch on the neck from Mr Spock</prosody></mstts:express-as></voice></speak>',
+    [ClassificationOption.Nothing]: "nothing",
+  };
+```
 
 If you want to change that default voice, that is tweakable [here](https://github.com/lazerwalker/machine-learning-rps/blob/main/src/textToSpeech.ts#L52). You can find more [examples of the JavaScript interface to Neural Text-to-Speech here](https://docs.microsoft.com/azure/cognitive-services/speech-service/quickstarts/text-to-speech?pivots=programming-language-javascript&tabs=dotnet%2Clinux%2Cjre%2Cwindowsinstall&WT.mc_id=rpsweb-github-davidsmi).
 
@@ -18,7 +29,13 @@ If you want to change that default voice, that is tweakable [here](https://githu
 
 If you want to swap out the [Custom Vision](https://customvision.ai) hand symbol recognition model for a different one entirely, that's going to take a little more work.
 
-For starters, you're going to need to export your model from Custom Vision as a TensorFlow.js model. This requires that it be trained on a compact model. You can drop the exported model right into the `model` folder of your repository, overwriting the existing one.
+First, you'll need to train a Custom Vision model using one of the "compact" domains.
+This you may find this [Custom Vision
+workshop](https://github.com/sethjuarez/vision) useful if you haven't trained a
+model before, and it also provides a convenient tool for capturing the image data needed to
+train the model. 
+
+For starters, you're going to need to export your model from Custom Vision as a TensorFlow.js model. You can drop the exported model right into the `model` folder of your repository, overwriting the existing one.
 
 In this codebase, the main place to look is the [imageDetection.ts file](https://github.com/lazerwalker/machine-learning-rps/blob/main/src/imageDetection.ts), which contains all of that logic.
 
