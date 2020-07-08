@@ -32,14 +32,13 @@ function startVideoStream() {
 
 function stringForResult(type: ClassificationOption): string {
   const map = {
-    [ClassificationOption.Rock]: 'that\'s a rock',
-    [ClassificationOption.Paper]: '<speak xmlns="http://www.w3.org/2001/10/synthesis" xmlns:mstts="http://www.w3.org/2001/mstts" xmlns:emo="http://www.w3.org/2009/10/emotionml" version="1.0" xml:lang="en-US"><voice name="fr-FR-DeniseNeural"><mstts:express-as style="CustomerService"><prosody rate="0%" pitch="0%">voici le papier</prosody></mstts:express-as></voice></speak>',
-    [ClassificationOption.Scissors]: 'don\'t run with scissors',
-    [ClassificationOption.Lizard]: '<speak xmlns="http://www.w3.org/2001/10/synthesis" xmlns:mstts="http://www.w3.org/2001/mstts" xmlns:emo="http://www.w3.org/2009/10/emotionml" version="1.0" xml:lang="en-US"><voice name="de-DE-KatjaNeural"><mstts:express-as style="General"><prosody rate="0%" pitch="0%">That is a lizard, ja?</prosody></mstts:express-as></voice></speak>',
-    [ClassificationOption.Spock]: '<speak xmlns="http://www.w3.org/2001/10/synthesis" xmlns:mstts="http://www.w3.org/2001/mstts" xmlns:emo="http://www.w3.org/2009/10/emotionml" version="1.0" xml:lang="en-US"><voice name="en-US-AriaNeural"><mstts:express-as style="Cheerful"><prosody rate="15%" pitch="10%">like a pinch on the neck from Mr Spock</prosody></mstts:express-as></voice></speak>',
-    [ClassificationOption.Nothing]: 'nothing',
-  };
-  return map[type];
+    [ClassificationOption.Rock]: "rock",
+    [ClassificationOption.Paper]: "paper",
+    [ClassificationOption.Scissors]: "scissors",
+    [ClassificationOption.Lizard]: "lizard",
+    [ClassificationOption.Spock]: "spock",
+    [ClassificationOption.Nothing]: "nothing",
+  };  return map[type];
 }
 
 function playAudio(text: string) {
