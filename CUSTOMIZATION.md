@@ -1,3 +1,5 @@
+# Customizing this application
+
 There are a bunch of choices if you want to customize this sample app!
 
 ## Changing the Spoken Text
@@ -6,7 +8,11 @@ If you want to change what words are read out when different hand symbols are re
 
 When the machine learning model recognizes on of the symbols listed as keys / on the left-hand side, it will trigger neural text-to-speech using the text values on the right-hand side.
 
-If a given text-to-speech string is valid [SSML](https://docs.microsoft.com/en-us/azure/cognitive-services/speech-service/speech-synthesis-markup?tabs=csharp&WT.mc_id=rpsweb-github-emwalker), Speech Services will use that SSML to determine how to read the text. Otherwise, if it's just a plain text string, it will be read by the `en-US-AriaNeural` neural TTS voice. If you want to change that default voice, that is tweakable [here](https://github.com/lazerwalker/machine-learning-rps/blob/main/src/textToSpeech.ts#L52).
+If a given text-to-speech string is valid [SSML](https://docs.microsoft.com/en-us/azure/cognitive-services/speech-service/speech-synthesis-markup?tabs=csharp&WT.mc_id=rpsweb-github-emwalker), Speech Services will use that SSML to determine how to read the text. Otherwise, if it's just a plain text string, it will be read by the `en-US-AriaNeural` neural TTS voice. You can test out your SSML at the [Neural TTS demo page](https://azure.microsoft.com/en-us/services/cognitive-services/text-to-speech/?WT.mc_id=rpsweb-github-davidsmi#features).
+
+[![The UI to add a GitHub Secret](img/texttospeechdemo.png)](https://azure.microsoft.com/en-us/services/cognitive-services/text-to-speech/?WT.mc_id=rpsweb-github-davidsmi#features)
+
+If you want to change that default voice, that is tweakable [here](https://github.com/lazerwalker/machine-learning-rps/blob/main/src/textToSpeech.ts#L52). You can find more [examples of the JavaScript interface to Neural Text-to-Speech here](https://docs.microsoft.com/azure/cognitive-services/speech-service/quickstarts/text-to-speech?pivots=programming-language-javascript&tabs=dotnet%2Clinux%2Cjre%2Cwindowsinstall&WT.mc_id=rpsweb-github-davidsmi).
 
 ## Changing the model itself
 
